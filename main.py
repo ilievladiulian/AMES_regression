@@ -1,12 +1,5 @@
 import pandas as pd
-import numpy as np
-from sklearn.model_selection import cross_val_score, train_test_split
-from sklearn.linear_model import LinearRegression, RidgeCV, LassoCV, ElasticNetCV
-from sklearn.metrics import mean_squared_error, make_scorer
-from scipy.stats import skew
 import matplotlib.pyplot as plt
-import seaborn as sns
-
 
 import preprocess
 import feature_generator
@@ -80,6 +73,12 @@ def main():
 
     # running the regression model using normalization
     model_handler.run_regression(df_train_final, normalize=True)
+
+    # apply k-fold cross-validation
+    model_handler.run_regression_with_cv(df_train_final)
+
+    # run regression and plot train and test learning curves
+    model_handler.run_regression_with_learning_curve(df_train_final)
 
     plt.show()
     return
