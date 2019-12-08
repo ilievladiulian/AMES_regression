@@ -54,7 +54,7 @@ def main():
     # REQUIREMENT 3 - Analyze, visualize and select features
 
     # extract top 20 relevant features using correlation plot
-    df_train_corr, df_test_corr, numerical_features, categorical_features = analyzer.extract_relevant_features_by_correlation(df_train_new, df_test_new)
+    df_train_corr, _, numerical_features, _ = analyzer.extract_relevant_features_by_correlation(df_train_new, df_test_new)
 
     # data distribution plots for top 20 most relevant features (only numerical features will be displayed)
     analyzer.plot_distributions_for_numerical_features(df_train_corr, numerical_features)
