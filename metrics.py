@@ -4,8 +4,8 @@ from math import sqrt
 def measure_metrics(model, X, y):
     y_predicted = model.predict(X)
 
-    measure_rmse(y, y_predicted)
-    measure_mse(y, y_predicted)
+    # measure_rmse(y, y_predicted)
+    # measure_mse(y, y_predicted)
     
     print('R^2: ' + str(model.score(X, y)))
 
