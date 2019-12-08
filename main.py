@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import cross_val_score, train_test_split
-from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression, RidgeCV, LassoCV, ElasticNetCV
 from sklearn.metrics import mean_squared_error, make_scorer
 from scipy.stats import skew
@@ -12,6 +11,7 @@ import seaborn as sns
 import preprocess
 import feature_generator
 import analyzer
+import model_handler
 
 def load_dataset():
     df_train = pd.read_csv('data/train.csv')
@@ -72,11 +72,17 @@ def main():
     # filter final features
     df_train_final = analyzer.select_features_of_interest(df_train_corr, df_train_lasso)
 
+    
+    # REQUIREMENT 4 - Train a regression model able to predict the house prices
 
+    # implementing a basic regression model and computing its accuracy
+    model_handler.run_regression(df_train_final)
+
+    # running the regression model using normalization
+    model_handler.run_regression(df_train_final, normalize=True)
 
     plt.show()
     return
-
 
 if __name__ == '__main__':
     main()

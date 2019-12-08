@@ -60,7 +60,7 @@ def lasso_regression_filtered_columns(df):
         lasso = LassoCV(n_alphas=1, alphas=[alpha])
         lasso.fit(X_train,y_train)
         
-        print(lasso.coef_)
+        # print(lasso.coef_)
         plt.figure()
         plt.plot(lasso.coef_,alpha=0.7,linestyle='none',marker='*',markersize=5,color='red',label=r'Lasso; $\alpha = 1$',zorder=7) # alpha here is for transparency
         plt.show(block=False)
@@ -70,11 +70,22 @@ def lasso_regression_filtered_columns(df):
         # drop redundant categorical and target columns
         non_zero_columns = non_zero_columns.drop(feature_generator.categorical_features + ['SalePrice'], axis=1)
 
-        non_zero = []
+        non_zero.append(non_zero_columns)
 
     # as alpha increases, the number of zero valued lasso coefficients increases -> we are interested only in the first value of alpha (for most non-zero columns)
     return non_zero[0]
 
 def select_features_of_interest(df_train_corr, df_train_lasso):
-    print('a')
+    df_train_lasso.info()
+    df_train_corr.info()
+    
+    # we can see from the information of both data frames that lasso also provides a non-zero coefficient for almost all columns obtained from the correlation matrix
+    # columns not included in the data frame from the correlation matrix:
+    #
+    # 2ndFlrSF, PoolArea
+    #
+    # we append these columns to the correlation data frame and obtain the final set of features
+
+    df_lasso_interest = pd.DataFrame(df_train_lasso[['2ndFlrSF', 'PoolArea']])
+    return pd.concat([df_train_corr, df_lasso_interest], axis=1)
 
