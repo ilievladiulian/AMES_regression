@@ -66,7 +66,7 @@ while the training error converges upward to the same value.
 
 OTHER
 
-The score obtained for predicting the 'SalePrice' of the test.csv data on Kaggle in the 'House Prices: Advanced Regression Techniques' challenge was:
+The score obtained for predicting the 'SalePrice' of the data/test.csv data on Kaggle in the 'House Prices: Advanced Regression Techniques' challenge was:
 
 RMSE = 0.16677
 
